@@ -1,0 +1,7 @@
+TO DO as of 3/23/22
+
+- Read stock symbol(s) and stock purchase price(s) from csv file. DONE
+- Think about what classes can be made and create them. DONE
+- Create unit tests.
+- Make a class for row of csv stock file. DONE
+- 
