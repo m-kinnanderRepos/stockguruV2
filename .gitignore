@@ -1,5 +1,7 @@
 .DS_Store
-config.json
+*.json
 .python-version
 .vscode/*
 *.csv
+__pycache__/
+*/__pycache__/

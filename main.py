@@ -3,76 +3,61 @@ import json
 from datetime import date, timedelta
 import sys
 import csv
+from classes.api_classes import HistoryResponse, HistoryApiConfig
+from classes.stock_classes import Stock
+from read import *
 
 
 
 
 
-def get_data(listOfStocks, config):
-  
+def get_data(listOfStocks: list, config: HistoryApiConfig):
   today = date.today()
-  fiveDaysAgo = today - timedelta(days=config["API"]["DAYSAGO"])
-  url = "https://api.finage.co.uk/history/stock/open-close"
-  for row in listOfStocks:
-    querystringFiveDaysAgo = {"stock":row[0],"date":fiveDaysAgo.strftime("%Y-%m-%d"),"apikey":config["API"]["KEY"]}
+  fiveDaysAgo = today - timedelta(days=config.daysAgo)
+  url = config.historyApiUrl
+
+  for stock in listOfStocks:
+    stockName = stock.name
+    querystringFiveDaysAgo = {"stock":stockName,"date":fiveDaysAgo.strftime("%Y-%m-%d"),"apikey":config.key}
     response = requests.request("GET", url, params=querystringFiveDaysAgo)
 
-    print(response)
-
     if(response.status_code == 200):
-        array = json.loads(response.text)
-        print("For " + row[0] + " high for 5 days ago is : " + str(array["high"]))
-        print("For " + row[0] + " low for 5 days ago is : " + str(array["low"]))
-
-        averageFiveDaysAgo = (array["high"] + array["low"]) / 2
-        print("For " + row[0] + " Average of the two is : " + str(averageFiveDaysAgo))
-
-        diff = float(row[1]) / averageFiveDaysAgo
-        print("For " + row[0] + " diff is : " + str(diff))
-        percent = 0
-        if(diff < 1):
-            percent = diff * 100
-        
-            if(percent > 46):
-                print("For " + row[0] + " greater than 46 percent")
-
-            else:
-                print("For " + row[0] + "l ess than 46 percent")
-        
-        else:
-            print("For " + row[0] + " price is less than buy price")
+        stockDecisionMaking(HistoryResponse(json.loads(response.text)), stockName, stock.price)
 
     else:
         print("Error in call to api.")
 
+
+
+def stockDecisionMaking(historyAPIResponse: HistoryResponse, stockName: str, stockPrice: float):
+    print("For " + stockName)
+    print("Buying price was: " + stockPrice)
+    print("High for 5 days ago is : " + historyAPIResponse.highToString())
+    print("Low for 5 days ago is : " + historyAPIResponse.lowToString())
+
+    averageFiveDaysAgo = (historyAPIResponse.high + historyAPIResponse.low) / 2
+    print("Average of the two is : " + str(averageFiveDaysAgo))
+
+    diff = float(stockPrice) / averageFiveDaysAgo
+    print("Diff is : " + str(diff))
     
-  # print(array)
-  # print(array["low"])
+    percent = 0
+    if(diff < 1):
+        percent = diff * 100
+    
+        if(percent > 46):
+            print("Is greater than 46 percent")
 
-def read_json(file_path):
-    with open(file_path, "r") as f:
-        return json.load(f)
+        else:
+            print("Is less than 46 percent")
+    
+    else:
+        print("Price is less than buy price")
 
-def read_csv(file_path):
-    stockList = []
-    with open(file_path, 'r') as file:
-        reader = csv.reader(file, skipinitialspace=True)
-        for row in reader:
-            stockList.append(row)
-    return stockList
 
           
 if __name__ == "__main__":
-    configFile = read_json("config.json")
-    listOfStocks = read_csv("stocks.csv")
-    # # for row in listOfStocks:
-    # #     print(row)
-    # # print(listOfStocks[0][1])
-    # stockSymbol = input("Enter stock symbol: ")
-    # print("Stock symbol is " + stockSymbol)
-    # price = float(input("Enter buy price: "))
-    # print("Buy price is " + str(price))
+    configFile: HistoryApiConfig = HistoryApiConfig(read_json("config-history_api.json"))
+    listOfStocks: list = read_csv_to_list_of_Stocks("stocks.csv")
+    
     get_data(listOfStocks, configFile)
-    # # print(configFile["API"]["KEY"])
-    
-    
