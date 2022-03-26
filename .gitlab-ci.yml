@@ -24,7 +24,7 @@ cache:
     - venv/
 
 before_script:
-  - python3 --V  # For debugging
+  - python3 -V # For debugging
   - pip3 install virtualenv
   - virtualenv venv
   - source venv/bin/activate
@@ -32,4 +32,4 @@ before_script:
 
 test:
   script:
-    - python3 -m unittest discover -v 
+    - python3 -m unittest discover -v
