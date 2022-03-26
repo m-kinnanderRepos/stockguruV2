@@ -29,11 +29,11 @@ def get_data(listOfStocks: list, config: HistoryApiConfig):
 
 
 
-def stockDecisionMaking(historyAPIResponse: HistoryResponse, stockName: str, stockPrice: float):
+def stockDecisionMaking(historyAPIResponse: HistoryResponse, stockName: str, stockPrice: str):
     print("For " + stockName)
     print("Buying price was: " + stockPrice)
-    print("High for 5 days ago is : " + historyAPIResponse.highToString())
-    print("Low for 5 days ago is : " + historyAPIResponse.lowToString())
+    print("High for 5 days ago is : " + str(historyAPIResponse.high))
+    print("Low for 5 days ago is : " + str(historyAPIResponse.low))
 
     averageFiveDaysAgo = (historyAPIResponse.high + historyAPIResponse.low) / 2
     print("Average of the two is : " + str(averageFiveDaysAgo))
