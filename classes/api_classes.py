@@ -3,12 +3,6 @@ class HistoryResponse:
     self.high = jsonLoads["high"]
     self.low = jsonLoads["low"]
 
-  def highToString(self):
-    return str(self.high)
-
-  def lowToString(self):
-    return str(self.low)
-
 
 
 class HistoryApiConfig: 
