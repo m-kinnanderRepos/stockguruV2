@@ -5,4 +5,5 @@ TO DO as of 3/23/22
 - Create unit tests. DONE
 - Make a class for row of csv stock file. DONE
 - Create unit tests for main.py
-- Create pipeline for merges
+- Create pipeline for merges. DONE
+- Block push to main branch. DONE
