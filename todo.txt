@@ -4,6 +4,9 @@ TO DO as of 3/23/22
 - Think about what classes can be made and create them. DONE
 - Create unit tests. DONE
 - Make a class for row of csv stock file. DONE
-- Create unit tests for main.py
+- Create unit tests for main.py. DONE
 - Create pipeline for merges. DONE
 - Block push to main branch. DONE
+- Refactor Main. DONE
+- Set up AWS Account.
+- Figure out how to run this application daily in AWS. 
