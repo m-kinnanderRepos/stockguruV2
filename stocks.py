@@ -52,13 +52,3 @@ def stockDecisionMaking(historyResponseStockTupleData: list):
         adviceList.append(Advice(dataSet[0], dataSet[1], averageFiveDaysAgo, diff, finalDecision))
 
     return adviceList
-
-
-def printDecision(advice):
-    print(f"\nFor {advice.stock.name}\n"
-        f"Buying price was: {advice.stock.price}\n"
-        f"High for 5 days ago is : {str(advice.historyResponse.high)}\n"
-        f"Low for 5 days ago is : {str(advice.historyResponse.low)}\n"
-        f"Average of the two is : {str(advice.averageFiveDaysAgo)}\n"
-        f"Diff is : {str(advice.diff)}\n"
-        f"{advice.finalDecision}\n")

@@ -10,3 +10,7 @@ You will also need to create a file called stocks.csv. This exists of a tab dili
 Running project:
 
 - In a terminal run `python main.py`
+
+Running tests:
+
+- In a terminal run `python tests/test_read.py` or `python tests/test_stocks.py`

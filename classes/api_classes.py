@@ -4,7 +4,6 @@ class HistoryResponse:
     self.low = jsonLoads["low"]
 
 
-
 class HistoryApiConfig: 
   def __init__(self, configFile):
     self.key = configFile["API"]["KEY"]
