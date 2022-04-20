@@ -8,5 +8,7 @@ TO DO as of 3/23/22
 - Create pipeline for merges. DONE
 - Block push to main branch. DONE
 - Refactor Main. DONE
-- Set up AWS Account.
-- Figure out how to run this application daily in AWS. 
+- Set up AWS Account. NO
+- Figure out how to run this application daily in AWS. TODO in other repo
+- Move makeDecsion to class
+- Remove AWS code DONE
