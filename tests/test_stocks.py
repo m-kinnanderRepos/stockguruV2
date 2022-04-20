@@ -26,6 +26,13 @@ def mocked_requests_get(*args, **kwargs):
         return MockResponse(None,400)
 
     return MockResponse(None, 404)
+
+def are_two_Advice_instances_the_same(instance1, instance2):
+    return (instance1.historyResponse == instance2.historyResponse and 
+            instance1.stock == instance2.stock and
+            instance1.averageFiveDaysAgo == instance2.averageFiveDaysAgo and
+            instance1.diff == instance2.diff and
+            instance1.finalDecision == instance2.finalDecision)
     
 
 class TestStockMethods(unittest.TestCase):
@@ -59,27 +66,21 @@ class TestStockMethods(unittest.TestCase):
 
     def test_stockDecisionMaking_46PercentOrMore(self):
         decisions = stockDecisionMaking([(self.response46OrMore, self.stock)])
-        self.assertTrue(decisions[0].historyResponse == self.advice46OrMore.historyResponse)
-        self.assertTrue(decisions[0].stock == self.advice46OrMore.stock)
-        self.assertTrue(decisions[0].averageFiveDaysAgo == self.advice46OrMore.averageFiveDaysAgo)
-        self.assertTrue(decisions[0].diff == self.advice46OrMore.diff)
-        self.assertTrue(decisions[0].finalDecision == self.advice46OrMore.finalDecision)
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice46OrMore))
 
     def test_stockDecisionMaking_LessThan46(self):
         decisions = stockDecisionMaking([(self.responseLessThan46, self.stock)])
-        self.assertTrue(decisions[0].historyResponse == self.adviceLessThan46.historyResponse)
-        self.assertTrue(decisions[0].stock == self.adviceLessThan46.stock)
-        self.assertTrue(decisions[0].averageFiveDaysAgo == self.adviceLessThan46.averageFiveDaysAgo)
-        self.assertTrue(decisions[0].diff == self.adviceLessThan46.diff)
-        self.assertTrue(decisions[0].finalDecision == self.adviceLessThan46.finalDecision)
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.adviceLessThan46))
 
     def test_stockDecisionMaking_Negative(self):
         decisions = stockDecisionMaking([(self.responseNegative, self.stock)])
-        self.assertTrue(decisions[0].historyResponse == self.adviceNegative.historyResponse)
-        self.assertTrue(decisions[0].stock == self.adviceNegative.stock)
-        self.assertTrue(decisions[0].averageFiveDaysAgo == self.adviceNegative.averageFiveDaysAgo)
-        self.assertTrue(decisions[0].diff == self.adviceNegative.diff)
-        self.assertTrue(decisions[0].finalDecision == self.adviceNegative.finalDecision)
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.adviceNegative))
+
+    def test_returnDecision_is_string_46PercentOrMore(self):
+        self.assertTrue(isinstance(self.advice46OrMore.returnDecision(), str))
+
+    def test_returnDecision_is_string_Negative(self):
+        self.assertTrue(isinstance(self.adviceNegative.returnDecision(), str))
 
 
 

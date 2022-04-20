@@ -8,4 +8,4 @@ if __name__ == "__main__":
     data = get_data(listOfStocks, configFile)
     decisionMakingAdvice = stockDecisionMaking(data)
     for pieceOfAdvice in decisionMakingAdvice:
-        printDecision(pieceOfAdvice)
+        print(pieceOfAdvice.returnDecision())

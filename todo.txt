@@ -8,7 +8,10 @@ TO DO as of 3/23/22
 - Create pipeline for merges. DONE
 - Block push to main branch. DONE
 - Refactor Main. DONE
-- Set up AWS Account. NO
+- Set up AWS Account. DONE
 - Figure out how to run this application daily in AWS. TODO in other repo
-- Move makeDecsion to class
-- Remove AWS code DONE
+- Move makeDecsion to class. DONE
+- Remove AWS code. DONE
+- Format README file.
+- Make a HelpfulLinks.md file.
+- Better error handling when status_code != 200.

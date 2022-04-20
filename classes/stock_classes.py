@@ -16,3 +16,12 @@ class Advice:
     self.averageFiveDaysAgo = averageFiveDaysAgo
     self.diff = diff
     self.finalDecision = finalDecision
+
+  def returnDecision(self):
+    return(f"\nFor {self.stock.name}\n"
+        f"Buying price was: {self.stock.price}\n"
+        f"High for 5 days ago is : {str(self.historyResponse.high)}\n"
+        f"Low for 5 days ago is : {str(self.historyResponse.low)}\n"
+        f"Average of the two is : {str(self.averageFiveDaysAgo)}\n"
+        f"Diff is : {str(self.diff)}\n"
+        f"{self.finalDecision}\n")
