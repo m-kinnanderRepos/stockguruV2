@@ -43,12 +43,18 @@ class TestStockMethods(unittest.TestCase):
                 {'symbol': 'ABC', 'open': 75.00, 'high': 75.00, 'low': 50.00, 'close': 75.00, 'volume': 32, 'from': '2022-01-01'})
         self.responseNegative = HistoryResponse(
                 {'symbol': 'ABC', 'open': 75.00, 'high': 25.00, 'low': 0.00, 'close': 75.00, 'volume': 32, 'from': '2022-01-01'})        
+        self.responseZero = HistoryResponse(
+                {'symbol': 'ABC', 'open': 50.00, 'high': 50.00, 'low': 50.00, 'close': 50.00, 'volume': 32, 'from': '2022-01-01'}) 
+
         self.stock = Stock(['ABC', '50.00'])
+
         self.config = HistoryApiConfig({'API': {'KEY': 'The_Key', 'DAYSAGO': 0, 'HISTORY_APIURL': 'https://mockendpoint.gg'}})
         self.config_HISTORY_APIURL = HistoryApiConfig({'API': {'KEY': 'The_Key', 'DAYSAGO': 0, 'HISTORY_APIURL': 'ERROR'}})
+        
         self.advice46OrMore = Advice(self.response46OrMore, self.stock, 75.00, 50.00, "Is greater than 46 percent")
         self.adviceLessThan46 = Advice(self.responseLessThan46, self.stock, 62.5, 25.00, "Is less than 46 percent")
         self.adviceNegative = Advice(self.responseNegative, self.stock, 12.5, -75.0, "Price is less than buy price")
+        self.adviceZero = Advice(self.responseZero, self.stock, 50.00, 0.00, "Is less than 46 percent")
 
     # We patch 'requests.get' with our own method. The mock object is passed in to our test case method.
     @mock.patch('stocks.requests.request', side_effect=mocked_requests_get)
@@ -76,11 +82,15 @@ class TestStockMethods(unittest.TestCase):
         decisions = stockDecisionMaking([(self.responseNegative, self.stock)])
         self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.adviceNegative))
 
-    def test_returnDecision_is_string_46PercentOrMore(self):
-        self.assertTrue(isinstance(self.advice46OrMore.returnDecision(), str))
+    def test_stockDecisionMaking_Zero(self):
+        decisions = stockDecisionMaking([(self.responseZero, self.stock)])
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.adviceZero))
 
-    def test_returnDecision_is_string_Negative(self):
-        self.assertTrue(isinstance(self.adviceNegative.returnDecision(), str))
+    def test_returnDecisionAsString_is_string_46PercentOrMore(self):
+        self.assertTrue(isinstance(self.advice46OrMore.returnDecisionAsString(), str))
+
+    def test_returnDecisionAsString_is_string_Negative(self):
+        self.assertTrue(isinstance(self.adviceNegative.returnDecisionAsString(), str))
 
 
 

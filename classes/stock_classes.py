@@ -17,7 +17,7 @@ class Advice:
     self.diff = diff
     self.finalDecision = finalDecision
 
-  def returnDecision(self):
+  def returnDecisionAsString(self):
     return(f"\nFor {self.stock.name}\n"
         f"Buying price was: {self.stock.price}\n"
         f"High for 5 days ago is : {str(self.historyResponse.high)}\n"

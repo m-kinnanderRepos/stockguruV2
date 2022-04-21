@@ -14,5 +14,6 @@ TO DO as of 3/23/22
 - Remove AWS code. DONE
 - Format README file. DONE
 - Make a HelpfulLinks.md file. DONE
+- Better naming conventions in main.py. DONE
 - Better error handling when status_code != 200.
 - Make branch with extra logic for decision making.
