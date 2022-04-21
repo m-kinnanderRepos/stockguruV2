@@ -40,12 +40,12 @@ def stockDecisionMaking(historyResponseStockTupleData: list):
         # I feel that stock increase and decrease are two important seperators. I am keeping this check in top level if/else.
         # Maybe in the future, these can be broken into two new functions and handled to give helpful feedback
         # for decrease price too. 
-        if(diff > 0):        
+        if(diff >= 0):        
             if(diff > 46):
                 finalDecision += "Is greater than 46 percent"
             else:
                 finalDecision += "Is less than 46 percent"
-        
+
         else:
             finalDecision += "Price is less than buy price"
 
