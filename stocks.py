@@ -10,7 +10,7 @@ from classes.stock_classes import Stock, Advice
 
 def get_data(listOfStocks: list, config: HistoryApiConfig):
     today = date.today()
-    fiveDaysAgo = today - timedelta(days=config.daysAgo)
+    fiveDaysAgo = today - timedelta(days=config.daysAgoFive)
     url = config.historyApiUrl
 
     tupleList = []

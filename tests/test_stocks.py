@@ -48,8 +48,8 @@ class TestStockMethods(unittest.TestCase):
 
         self.stock = Stock(['ABC', '50.00'])
 
-        self.config = HistoryApiConfig({'API': {'KEY': 'The_Key', 'DAYSAGO': 0, 'HISTORY_APIURL': 'https://mockendpoint.gg'}})
-        self.config_HISTORY_APIURL = HistoryApiConfig({'API': {'KEY': 'The_Key', 'DAYSAGO': 0, 'HISTORY_APIURL': 'ERROR'}})
+        self.config = HistoryApiConfig({'API': {'KEY': 'The_Key', 'DAYSAGOFIVE': 0, 'HISTORY_APIURL': 'https://mockendpoint.gg',"DAYSAGOTWENTYONE": 21, "DAYSAGOTHIRTY": 30}})
+        self.config_HISTORY_APIURL = HistoryApiConfig({'API': {'KEY': 'The_Key', 'DAYSAGOFIVE': 0, 'HISTORY_APIURL': 'ERROR',"DAYSAGOTWENTYONE": 21, "DAYSAGOTHIRTY": 30}})
         
         self.advice46OrMore = Advice(self.response46OrMore, self.stock, 75.00, 50.00, "Is greater than 46 percent")
         self.adviceLessThan46 = Advice(self.responseLessThan46, self.stock, 62.5, 25.00, "Is less than 46 percent")

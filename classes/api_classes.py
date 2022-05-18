@@ -7,6 +7,8 @@ class HistoryResponse:
 class HistoryApiConfig: 
   def __init__(self, configFile):
     self.key = configFile["API"]["KEY"]
-    self.daysAgo = configFile["API"]["DAYSAGO"]
+    self.daysAgoFive = configFile["API"]["DAYSAGOFIVE"]
     self.historyApiUrl = configFile["API"]["HISTORY_APIURL"]
+    self.daysAgoTwentyOne = configFile["API"]["DAYSAGOTWENTYONE"]
+    self.daysAgoThirty = configFile["API"]["DAYSAGOTHIRTY"]
 
