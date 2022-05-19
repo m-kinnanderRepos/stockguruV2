@@ -20,10 +20,9 @@ You will need to create a config-history_api.json file in root directory with fo
 {
   "API": {
     "KEY": "Your_API_key",
-    "DAYSAGOFIVE": 5,
+    "DAYSAGOFOURTEEN": 14,
     "HISTORY_APIURL": "https://api.finage.co.uk/history/stock/open-close",
-    "DAYSAGOTWENTYONE": 21,
-    "DAYSAGOTHIRTY": 30
+    "DAYSAGOTWENTYEIGHT": 28
   }
 }
 ```

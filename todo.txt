@@ -1,19 +1,16 @@
-TO DO as of 3/23/22
+TO DO
 
-- Read stock symbol(s) and stock purchase price(s) from csv file. DONE
-- Think about what classes can be made and create them. DONE
-- Create unit tests. DONE
-- Make a class for row of csv stock file. DONE
-- Create unit tests for main.py. DONE
-- Create pipeline for merges. DONE
-- Block push to main branch. DONE
-- Refactor Main. DONE
-- Set up AWS Account. TODO in other repo
-- Figure out how to run this application daily in AWS. TODO in other repo
-- Move makeDecsion to class. DONE
-- Remove AWS code. DONE
-- Format README file. DONE
-- Make a HelpfulLinks.md file. DONE
-- Better naming conventions in main.py. DONE
-- Better error handling when status_code != 200.
-- Make branch with extra logic for decision making.
+Get the data for all three days (28, 14, and today).
+Do advice from the three sets.
+  1) If 28 isn't above 45% than saw so plus is 14 days above 45%?
+  2) If 28 Is above 45%, then is 14?
+  3) If 28 and 14 are above 45%, then buy. 
+
+Decision Making: [28, 14, 0]
+[00*] Answer: Do not sell
+[010] Answer: Do not sell
+[011] Answer: Check Next week. Could be trending up.
+[100] Answer: Do not sell
+[101] Answer: Do not sell
+[110] Answer: Check tomorrow. Could be trending down.
+[111] Anser: Think about selling
