@@ -3,7 +3,7 @@ import os
 import sys
 # Append parent directory to import path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from classes.api_classes import HistoryApiConfig, HistoryResponse
+from classes.api_classes import HistoryApiConfig, HistoryResponse, LastQuoteResponse
 
 class TestHistoryApiConfig(unittest.TestCase):
     def setUp(self):
@@ -25,6 +25,14 @@ class TestHistoryResponse(unittest.TestCase):
     def test_hisotryResponse_init(self):
         self.assertTrue(self.response.high == 1.9)
         self.assertTrue(self.response.low == 1.00)
+
+class TestLastQuoteResponse(unittest.TestCase):
+    def setUp(self):
+        self.response = LastQuoteResponse({"symbol":"ABC", "ask":10.00, "bid":10.00, "asize":3, "bsize":1, "timestamp":1604710766331})
+
+    def test_lastQuoteResponse_init(self):
+        self.assertTrue(self.response.ask == 10.00)    
+        self.assertTrue(self.response.bid == 10.00)
 
 
 if __name__ == '__main__':

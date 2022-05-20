@@ -10,11 +10,15 @@ class Stock:
     self.price = csvRow[1]
 
 class Advice:
-  def __init__(self, historyResponse: HistoryResponse, stock: Stock, averageFiveDaysAgo, diff, finalDecision):
-    self.historyResponse = historyResponse
+  def __init__(self, currentAsk, averageFourteenDaysAgo, averageTwentyEightDaysAgo, stock: Stock, finalDecision):
+    self.currentAsk = currentAsk
+    self.averageFourteenDaysAgo = averageFourteenDaysAgo
+    self.averageTwentyEightDaysAgo = averageTwentyEightDaysAgo
+  # def __init__(self, historyResponse: HistoryResponse, stock: Stock, averageFiveDaysAgo, diff, finalDecision):
+    # self.historyResponse = historyResponse
     self.stock = stock
-    self.averageFiveDaysAgo = averageFiveDaysAgo
-    self.diff = diff
+    # self.averageFiveDaysAgo = averageFiveDaysAgo
+    # self.diff = diff
     self.finalDecision = finalDecision
 
   def returnDecisionAsString(self):

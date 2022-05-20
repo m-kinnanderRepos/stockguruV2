@@ -11,3 +11,7 @@ class HistoryApiConfig:
     self.historyApiUrl = configFile["API"]["HISTORY_APIURL"]
     self.daysAgoTwentyEight = configFile["API"]["DAYSAGOTWENTYEIGHT"]
 
+class LastQuoteResponse:
+  def __init__(self, jsonLoads):
+    self.ask = jsonLoads["ask"]
+    self.bid = jsonLoads["bid"]
