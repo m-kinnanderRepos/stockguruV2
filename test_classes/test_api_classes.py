@@ -7,14 +7,16 @@ from classes.api_classes import HistoryApiConfig, HistoryResponse, LastQuoteResp
 
 class TestHistoryApiConfig(unittest.TestCase):
     def setUp(self):
-        self.config = HistoryApiConfig({'API': {'KEY': 'The_Key', 'DAYSAGOFOURTEEN': 14, 'HISTORY_APIURL': 'https://mockendpoint.gg',"DAYSAGOTWENTYEIGHT": 28}})
+        self.config = HistoryApiConfig(
+            {'API': {'KEY': 'The_Key', 'DAYSAGOFOURTEEN': 14,"DAYSAGOTWENTYEIGHT": 28, 'HISTORY_APIURL': 'https://mockendpoint.gg', 'LASTQUOTE_APIURL': 'https://mockendpoint2.gg'}})
 
     def test_historyApiConfig_init(self):
         
         self.assertTrue(self.config.key == "The_Key")
         self.assertTrue(self.config.daysAgoFourteen == 14)
-        self.assertTrue(self.config.historyApiUrl == "https://mockendpoint.gg")
         self.assertTrue(self.config.daysAgoTwentyEight == 28)
+        self.assertTrue(self.config.historyApiUrl == "https://mockendpoint.gg")
+        self.assertTrue(self.config.lastQuoteApiUrl == "https://mockendpoint2.gg")
 
 
 class TestHistoryResponse(unittest.TestCase):

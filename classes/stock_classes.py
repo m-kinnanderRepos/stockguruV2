@@ -14,11 +14,7 @@ class Advice:
     self.currentAsk = currentAsk
     self.averageFourteenDaysAgo = averageFourteenDaysAgo
     self.averageTwentyEightDaysAgo = averageTwentyEightDaysAgo
-  # def __init__(self, historyResponse: HistoryResponse, stock: Stock, averageFiveDaysAgo, diff, finalDecision):
-    # self.historyResponse = historyResponse
     self.stock = stock
-    # self.averageFiveDaysAgo = averageFiveDaysAgo
-    # self.diff = diff
     self.finalDecision = finalDecision
 
   def returnDecisionAsString(self):

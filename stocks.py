@@ -3,31 +3,38 @@ import json
 from datetime import date, timedelta
 import sys
 import csv
-from classes.api_classes import HistoryResponse, HistoryApiConfig
+from classes.api_classes import HistoryResponse, HistoryApiConfig, LastQuoteResponse
 from classes.stock_classes import Stock, Advice
 
+def get_api_call(url, queryString):
+    return requests.request("GET", url, params=queryString)
 
-# 
+
 def get_data(listOfStocks: list, config: HistoryApiConfig):
     today = date.today()
-    fiveDaysAgo = today - timedelta(days=config.daysAgoFourteen)
+    fourteenDaysAgo = today - timedelta(days=config.daysAgoFourteen)
+    twentyEightDaysAgo = today - timedelta(days=config.daysAgoTwentyEight)
     url = config.historyApiUrl
 
     tupleList = []
     for stock in listOfStocks:
-        # We should be making three calls now.
-        # Making sure each one is successful.
-        querystringFiveDaysAgo = {"stock":stock.name,"date":fiveDaysAgo.strftime("%Y-%m-%d"),"apikey":config.key}
-        response = requests.request("GET", url, params=querystringFiveDaysAgo)
+        todaysResponse = get_api_call(config.lastQuoteApiUrl + stock.name, {"apikey":config.key})
+        fourteenDaysResponse = get_api_call(config.historyApiUrl, 
+            {"stock":stock.name,"date":fourteenDaysAgo.strftime("%Y-%m-%d"),"apikey":config.key})
+        twentyEightDaysResponse = get_api_call(config.historyApiUrl, 
+            {"stock":stock.name,"date":twentyEightDaysAgo.strftime("%Y-%m-%d"),"apikey":config.key})
         
-        if(response.status_code == 200):
+
+        if(twentyEightDaysResponse.status_code == 200 and fourteenDaysResponse.status_code == 200
+         and todaysResponse.status_code == 200):
             # What should be returned now is a list of (LastQuoteResponse, HistoryResponse, HistoryResponse, stock)
-            # That would be response from Last Quote of today, history quote from 14 days ago, history quote from 28 days ago, and stock
-            tupleList.append((HistoryResponse(json.loads(response.text)), stock)) 
+            todaysResponseClass = LastQuoteResponse(json.loads(todaysResponse.text))
+            fourteenDaysResponseClass = HistoryResponse(json.loads(fourteenDaysResponse.text))
+            twentyEightDaysResponseClass = HistoryResponse(json.loads(twentyEightDaysResponse.text))
+            tupleList.append((todaysResponseClass, fourteenDaysResponseClass, twentyEightDaysResponseClass, stock))
 
         else:
             print(f"Error in call to api for {stock.name}.")
-    # Should now return List((LastQuoteResponse, HistoryResponse, HistoryResponse, stock))
     return tupleList
 
 
