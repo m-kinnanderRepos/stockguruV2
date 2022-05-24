@@ -39,27 +39,22 @@ def get_data(listOfStocks: list, config: HistoryApiConfig):
 
 
 # Takes in List((LastQuoteResponse, HistoryResponse, HistoryResponse, stock))
-def stockDecisionMaking(historyResponseStockTupleData: list):
+def stockDecisionMaking(threeResponsesStockData: list):
     # Percentage Increase = [ (Final Value - Starting Value) / |Starting Value| ] × 100
     adviceList = []
-    for dataSet in historyResponseStockTupleData:
-        averageFiveDaysAgo = (dataSet[0].high + dataSet[0].low) / 2
+    for dataSet in threeResponsesStockData:
+        averageFourteenDaysAgo = (dataSet[1].high + dataSet[1].low) / 2
+        averageTwentyEightDaysAgo = (dataSet[2].high + dataSet[2].low) / 2
         # diff = float(dataSet[1].price) / averageFiveDaysAgo
-        diff = ((averageFiveDaysAgo - float(dataSet[1].price)) / float(dataSet[1].price)) * 100
+        diffToday = ((dataSet[0].ask - float(dataSet[3].price)) / float(dataSet[3].price)) * 100
+        diffFourteenDaysAgo = ((averageFourteenDaysAgo - float(dataSet[3].price)) / float(dataSet[3].price)) * 100
+        diffTwentyEightDaysAgo = ((averageTwentyEightDaysAgo - float(dataSet[3].price)) / float(dataSet[3].price)) * 100
     
         finalDecision = ""
-        # I feel that stock increase and decrease are two important seperators. I am keeping this check in top level if/else.
-        # Maybe in the future, these can be broken into two new functions and handled to give helpful feedback
-        # for decrease price too. 
-        if(diff >= 0):        
-            if(diff > 46):
-                finalDecision += "Is greater than 46 percent"
-            else:
-                finalDecision += "Is less than 46 percent"
+        
+        if(diffTwentyEightDaysAgo < 45 and diffFourteenDaysAgo < 45 and diffToday < 45):
+            finalDecision += "do not sell."
 
-        else:
-            finalDecision += "Price is less than buy price"
-
-        adviceList.append(Advice(dataSet[0], dataSet[1], averageFiveDaysAgo, diff, finalDecision))
+        adviceList.append(Advice(dataSet[0].ask, averageFourteenDaysAgo, averageTwentyEightDaysAgo, dataSet[3], finalDecision))
 
     return adviceList

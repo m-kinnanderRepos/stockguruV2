@@ -53,10 +53,10 @@ class TestStockMethods2(unittest.TestCase):
         
         self.advice = Advice(10.00, 10.00, 10.00, self.stock, "")
 
-        self.decisionNotSellAMC = self.stock.name + " - do not sell."
-        self.decisionCheckTomorrowAMC = self.stock.name + " - could be trending DOWN. Check tomorrow."
-        self.decisionCheckNextWekkAMC = self.stock.name + " - could be trending UP. Check next week."
-        self.decisionSellAMC = self.stock.name + " - think about selling!"
+        self.decisionNotSellAMC = "do not sell."
+        self.decisionCheckTomorrowAMC = "could be trending DOWN. Check tomorrow."
+        self.decisionCheckNextWekkAMC = "could be trending UP. Check next week."
+        self.decisionSellAMC = "think about selling!"
 
         
     # We patch 'requests.get' with our own method. The mock object is passed in to our test case method.
@@ -85,8 +85,9 @@ class TestStockMethods2(unittest.TestCase):
     # 110 Answer: Check next wekk. Could be trending up.
     # 111 Answer: Think about selling
 
+# List((LastQuoteResponse, HistoryResponse, HistoryResponse, stock))
     def test_stockDecisionMaking_000(self):
-        decisions = stockDecisionMaking([self.advice])
+        decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
         self.advice.finalDecision = self.decisionNotSellAMC
         self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
     # def test_stockDecisionMaking_001(self):
@@ -96,30 +97,6 @@ class TestStockMethods2(unittest.TestCase):
     # def test_stockDecisionMaking_101(self):
     # def test_stockDecisionMaking_110(self):
     # def test_stockDecisionMaking_111(self):
-
-
-    # def test_stockDecisionMaking_46PercentOrMore(self):
-    #     decisions = stockDecisionMaking([(self.response46OrMore, self.stock)])
-    #     self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice46OrMore))
-
-    # def test_stockDecisionMaking_LessThan46(self):
-    #     decisions = stockDecisionMaking([(self.responseLessThan46, self.stock)])
-    #     self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.adviceLessThan46))
-
-    # def test_stockDecisionMaking_Negative(self):
-    #     decisions = stockDecisionMaking([(self.responseNegative, self.stock)])
-    #     self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.adviceNegative))
-
-    # def test_stockDecisionMaking_Zero(self):
-    #     decisions = stockDecisionMaking([(self.responseZero, self.stock)])
-    #     self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.adviceZero))
-
-    # def test_returnDecisionAsString_is_string_46PercentOrMore(self):
-    #     self.assertTrue(isinstance(self.advice46OrMore.returnDecisionAsString(), str))
-
-    # def test_returnDecisionAsString_is_string_Negative(self):
-    #     self.assertTrue(isinstance(self.adviceNegative.returnDecisionAsString(), str))
-
 
 
 if __name__ == '__main__':
