@@ -90,14 +90,54 @@ class TestStockMethods2(unittest.TestCase):
         decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
         self.advice.finalDecision = self.decisionNotSellAMC
         self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
-    # def test_stockDecisionMaking_001(self):
-    # def test_stockDecisionMaking_010(self):
-    # def test_stockDecisionMaking_011(self):
-    # def test_stockDecisionMaking_100(self):
-    # def test_stockDecisionMaking_101(self):
-    # def test_stockDecisionMaking_110(self):
-    # def test_stockDecisionMaking_111(self):
 
+    def test_stockDecisionMaking_001(self):
+        self.twentyEightDayResponse.high = 20.00
+        self.twentyEightDayResponse.low = 20.00
+        decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
+        self.advice.finalDecision = self.decisionNotSellAMC
+        self.advice.averageTwentyEightDaysAgo = 20.00
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+
+    def test_stockDecisionMaking_010(self):
+        self.fourteenDayResponse.high = 20.00
+        self.fourteenDayResponse.low = 20.00
+        decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
+        self.advice.finalDecision = self.decisionNotSellAMC
+        self.advice.averageFourteenDaysAgo = 20.00
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+
+    def test_stockDecisionMaking_011(self):
+        self.fourteenDayResponse.high = 20.00
+        self.fourteenDayResponse.low = 20.00
+        self.twentyEightDayResponse.high = 20.00
+        self.twentyEightDayResponse.low = 20.00
+        decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
+        self.advice.finalDecision = self.decisionCheckTomorrowAMC
+        self.advice.averageFourteenDaysAgo = 20.00
+        self.advice.averageTwentyEightDaysAgo = 20.00
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+
+    def test_stockDecisionMaking_100(self):
+        self.todayResponse.ask = 20.00
+        decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
+        self.advice.finalDecision = self.decisionNotSellAMC
+        self.advice.currentAsk = 20.00
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+
+    # def test_stockDecisionMaking_101(self):
+        # decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
+         # self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+        # self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+                  
+    # def test_stockDecisionMaking_110(self):
+        # decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
+        # self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+            
+    # def test_stockDecisionMaking_111(self):
+        # decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
+        # self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+        
 
 if __name__ == '__main__':
     unittest.main()
