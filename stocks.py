@@ -52,8 +52,12 @@ def stockDecisionMaking(threeResponsesStockData: list):
     
         finalDecision = ""
         
-        if(diffFourteenDaysAgo > 46 and diffTwentyEightDaysAgo > 46):
+        if(diffToday > 46 and diffFourteenDaysAgo > 46 and diffTwentyEightDaysAgo > 46):
+            finalDecision += "think about selling!"
+        elif(diffFourteenDaysAgo > 46 and diffTwentyEightDaysAgo > 46):
             finalDecision += "could be trending DOWN. Check tomorrow."
+        elif(diffToday > 46 and diffFourteenDaysAgo > 46):
+            finalDecision += "could be trending UP. Check next week."        
         else:
             finalDecision += "do not sell."
 

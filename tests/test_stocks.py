@@ -55,7 +55,7 @@ class TestStockMethods2(unittest.TestCase):
 
         self.decisionNotSellAMC = "do not sell."
         self.decisionCheckTomorrowAMC = "could be trending DOWN. Check tomorrow."
-        self.decisionCheckNextWekkAMC = "could be trending UP. Check next week."
+        self.decisionCheckNextWeekAMC = "could be trending UP. Check next week."
         self.decisionSellAMC = "think about selling!"
 
         
@@ -125,18 +125,38 @@ class TestStockMethods2(unittest.TestCase):
         self.advice.currentAsk = 20.00
         self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
 
-    # def test_stockDecisionMaking_101(self):
-        # decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
-         # self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
-        # self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+    def test_stockDecisionMaking_101(self):
+        self.todayResponse.ask = 20.00
+        self.twentyEightDayResponse.high = 20.00
+        self.twentyEightDayResponse.low = 20.00
+        decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
+        self.advice.finalDecision = self.decisionNotSellAMC
+        self.advice.currentAsk = 20.00
+        self.advice.averageTwentyEightDaysAgo = 20.00
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
                   
-    # def test_stockDecisionMaking_110(self):
-        # decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
-        # self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+    def test_stockDecisionMaking_110(self):
+        self.todayResponse.ask = 20.00
+        self.fourteenDayResponse.high = 20.00
+        self.fourteenDayResponse.low = 20.00
+        decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
+        self.advice.finalDecision = self.decisionCheckNextWeekAMC
+        self.advice.currentAsk = 20.00
+        self.advice.averageFourteenDaysAgo = 20.00
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
             
-    # def test_stockDecisionMaking_111(self):
-        # decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
-        # self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
+    def test_stockDecisionMaking_111(self):
+        self.todayResponse.ask = 20.00
+        self.fourteenDayResponse.high = 20.00
+        self.fourteenDayResponse.low = 20.00
+        self.twentyEightDayResponse.high = 20.00
+        self.twentyEightDayResponse.low = 20.00
+        decisions = stockDecisionMaking([(self.todayResponse, self.fourteenDayResponse, self.twentyEightDayResponse, self.stock)])
+        self.advice.finalDecision = self.decisionSellAMC
+        self.advice.currentAsk = 20.00
+        self.advice.averageFourteenDaysAgo = 20.00
+        self.advice.averageTwentyEightDaysAgo = 20.00
+        self.assertTrue(are_two_Advice_instances_the_same(decisions[0], self.advice))
         
 
 if __name__ == '__main__':
