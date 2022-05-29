@@ -1,6 +1,6 @@
-# stockGuru
+# stockGuruV2
 
-stockGuru is a program to help monitor your stocks.
+stockGuruV2 is a program to help monitor your stocks.
 
 ## Installation
 
@@ -54,9 +54,11 @@ python3 -m unittest discover -v
 
 ## Notes
 
-The `main` branch is for users to get started and can be used by anyone with the free subscription to the api from [Finage](https://finage.co.uk/#pricing). The `main` branch is based off of the free subscription because of the limitations the free subscription tier has (mainly 15 second delay between calls). It's also nice to not have to pay to try this project out. I have more logic I would like for decision making that I will eventually add into a branch based off of main.
+The `main` branch is for users to get started and can be used by users with a paid subscription to the api from [Finage](https://finage.co.uk/#pricing). Visit [stockGuru](https://github.com/m-kinnanderRepos/stockguru) if you only have a free subscription. This application uses the advatages the paid subscription offers. For every stock, the application retreives historical data from 28 days ago and 14 days ago. It also retreives data for today's asking price. Using the data from these three api calls, the application calculates advice on what to do with the stock.
 
-## [Finage API documentation](https://finage.co.uk/docs/api/us-stock-historical-end-of-day-data)
+## [Finage API documentation historical data](https://finage.co.uk/docs/api/us-stock-historical-end-of-day-data)
+
+## [Finage API documentation last quote data](https://finage.co.uk/docs/api/stock-last-quote)
 
 ## Contributing
 
