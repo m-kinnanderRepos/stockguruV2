@@ -13,7 +13,7 @@ class TestStock(unittest.TestCase):
         self.assertTrue(stock.price == "1.23")
 
 
-class TestAdvice2(unittest.TestCase):
+class TestAdvice(unittest.TestCase):
     def setUp(self):
         self.stock = Stock(['ABC', '1.23'])
 

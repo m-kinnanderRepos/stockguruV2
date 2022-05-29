@@ -1,16 +1,1 @@
 TO DO
-
-Get the data for all three days (28, 14, and today).
-Do advice from the three sets.
-  1) If 28 isn't above 45% than saw so plus is 14 days above 45%?
-  2) If 28 Is above 45%, then is 14?
-  3) If 28 and 14 are above 45%, then buy. 
-
-Decision Making: [28, 14, 0]
-[00*] Answer: Do not sell
-[010] Answer: Do not sell
-[011] Answer: Check Next week. Could be trending up.
-[100] Answer: Do not sell
-[101] Answer: Do not sell
-[110] Answer: Check tomorrow. Could be trending down.
-[111] Anser: Think about selling

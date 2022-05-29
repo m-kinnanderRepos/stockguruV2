@@ -37,7 +37,7 @@ def are_two_Advice_instances_the_same(instance1, instance2):
             instance1.finalDecision == instance2.finalDecision)
     
 
-class TestStockMethods2(unittest.TestCase):
+class TestStockMethods(unittest.TestCase):
     def setUp(self):
         self.todayResponse = LastQuoteResponse(
                 {"symbol":"ABC", "ask":10.00, "bid":10.00, "asize":3, "bsize":1, "timestamp":1604710766331})
