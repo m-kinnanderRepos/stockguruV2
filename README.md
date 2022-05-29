@@ -20,8 +20,10 @@ You will need to create a config-history_api.json file in root directory with fo
 {
   "API": {
     "KEY": "Your_API_key",
-    "DAYSAGO": 5,
-    "HISTORY_APIURL": "https://api.finage.co.uk/history/stock/open-close"
+    "DAYSAGOFOURTEEN": 14,
+    "DAYSAGOTWENTYEIGHT": 28,
+    "HISTORY_APIURL": "https://api.finage.co.uk/history/stock/open-close",
+    "LASTQUOTE_APIURL": "https://api.finage.co.uk/last/stock/"
   }
 }
 ```
@@ -44,10 +46,10 @@ python main.py
 python tests/test_read.py
 ```
 
-or
+or to run all tests
 
 ```bash
-python tests/test_stocks.py
+python3 -m unittest discover -v
 ```
 
 ## Notes
